@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="13.7in" Name="FirstGraphReport" xmlns="http://schemas.telerik.com/reporting/2025/2.0">
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="csvDataSource1">
+      <Source>
+        <Uri Path="reconditioning_costs.csv" />
+      </Source>
+      <Columns>
+        <DataColumn Name="VIN" />
+        <DataColumn Name="Year" Type="Integer" />
+        <DataColumn Name="Make" />
+        <DataColumn Name="Model" />
+        <DataColumn Name="StockNumber" />
+        <DataColumn Name="DateReceived" />
+        <DataColumn Name="DateCompleted" />
+        <DataColumn Name="Status" />
+        <DataColumn Name="MechanicalEstimate" />
+        <DataColumn Name="MechanicalActual" />
+        <DataColumn Name="BodyWorkEstimate" />
+        <DataColumn Name="BodyWorkActual" />
+        <DataColumn Name="DetailingEstimate" />
+        <DataColumn Name="DetailingActual" />
+        <DataColumn Name="TiresEstimate" />
+        <DataColumn Name="TiresActual" />
+        <DataColumn Name="OtherEstimate" />
+        <DataColumn Name="OtherActual" />
+        <DataColumn Name="TotalEstimate" />
+        <DataColumn Name="TotalActual" Type="Float" />
+        <DataColumn Name="Variance" />
+      </Columns>
+    </CsvDataSource>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="csvDataSource2">
+      <Source>
+        <Uri Path="vehicle_inventory.csv" />
+      </Source>
+      <Columns>
+        <DataColumn Name="VIN" />
+        <DataColumn Name="Year" Type="Integer" />
+        <DataColumn Name="Make" />
+        <DataColumn Name="Model" />
+        <DataColumn Name="Trim" />
+        <DataColumn Name="Mileage" Type="Float" />
+        <DataColumn Name="Color" />
+        <DataColumn Name="PurchasePrice" Type="Decimal" />
+        <DataColumn Name="ListPrice" />
+        <DataColumn Name="PurchaseDate" />
+        <DataColumn Name="ListDate" />
+        <DataColumn Name="Status" />
+      </Columns>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <PageHeaderSection Height="1in" Name="pageHeaderSection1" />
+    <DetailSection Height="3.3in" Name="detailSection1">
+      <Items>
+        <Graph DataSourceName="csvDataSource1" Width="5.2in" Height="3.1in" Left="4.2in" Top="0.1in" Name="graph1">
+          <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+          <Axes>
+            <GraphAxis Name="graphAxis2">
+              <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <Scale>
+                <CategoryScale />
+              </Scale>
+            </GraphAxis>
+            <GraphAxis Name="graphAxis1">
+              <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <Scale>
+                <NumericalScale />
+              </Scale>
+            </GraphAxis>
+          </Axes>
+          <CoordinateSystems>
+            <CartesianCoordinateSystem XAxis="graphAxis2" YAxis="graphAxis1" Name="cartesianCoordinateSystem1" />
+          </CoordinateSystems>
+          <Legend>
+            <Style LineWidth="0in" LineColor="LightGray" />
+          </Legend>
+          <Style>
+            <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+          </Style>
+          <SeriesGroups>
+            <GraphGroup Name="seriesGroup" />
+          </SeriesGroups>
+          <CategoryGroups>
+            <GraphGroup Name="yearGroup">
+              <Groupings>
+                <Grouping Expression="= Fields.Year" />
+              </Groupings>
+              <Sortings>
+                <Sorting Expression="= Fields.Year" Direction="Asc" />
+              </Sortings>
+            </GraphGroup>
+          </CategoryGroups>
+          <Series>
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="yearGroup" SeriesGroup="seriesGroup" Y="= Sum(Fields.TotalActual)" ArrangeMode="Stacked" DataPointLabel="= Sum(Fields.TotalActual)" Name="barSeries1">
+              <DataPointStyle Visible="True" LineWidth="0in" />
+              <DataPointLabelStyle Visible="False" />
+              <LegendItem Value="'Sum(TotalActual)'" />
+              <MergedDataPoints />
+              <ToolTip Title="'Sum(TotalActual)'" Text="= Sum(Fields.TotalActual)" />
+            </BarSeries>
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="yearGroup" SeriesGroup="seriesGroup" Y="= Sum(Fields.TotalEstimate)" ArrangeMode="Stacked" DataPointLabel="= Sum(Fields.TotalEstimate)" Name="barSeries2">
+              <DataPointStyle Visible="True" LineWidth="0in" />
+              <DataPointLabelStyle Visible="True" />
+              <LegendItem Value="'Sum(TotalEstimate)'" />
+              <MergedDataPoints />
+              <ToolTip Title="'Sum(TotalEstimate)'" Text="= Sum(Fields.TotalEstimate)" />
+            </BarSeries>
+          </Series>
+          <Titles>
+            <GraphTitle Text="Total Estimate" Position="TopCenter">
+              <Style LineWidth="0in" LineColor="LightGray" />
+            </GraphTitle>
+          </Titles>
+        </Graph>
+      </Items>
+    </DetailSection>
+    <PageFooterSection Height="1in" Name="pageFooterSection1" />
+  </Items>
+  <PageSettings PaperKind="Letter" Landscape="False" ColumnCount="1" ColumnSpacing="0in">
+    <Margins>
+      <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+    </Margins>
+  </PageSettings>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+</Report>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="9.6in" Name="Report3" xmlns="http://schemas.telerik.com/reporting/2025/2.0">
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="csvDataSource1">
+      <Source>
+        <Uri Path="vehicle_inventory.csv" />
+      </Source>
+      <Columns>
+        <DataColumn Name="VIN" />
+        <DataColumn Name="Year" />
+        <DataColumn Name="Make" />
+        <DataColumn Name="Model" />
+        <DataColumn Name="Trim" />
+        <DataColumn Name="Mileage" />
+        <DataColumn Name="Color" />
+        <DataColumn Name="PurchasePrice" />
+        <DataColumn Name="ListPrice" />
+        <DataColumn Name="PurchaseDate" />
+        <DataColumn Name="ListDate" />
+        <DataColumn Name="Status" />
+      </Columns>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <DetailSection Height="1in" Name="detailSection1">
+      <Items>
+        <Table DataSourceName="csvDataSource1" Width="9.6in" Height="0.4in" Left="0in" Top="0in" Name="table1" StyleName="BlueOpal.TableNormal">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Color" Name="textBox13" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.ListDate" Name="textBox14" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.ListPrice" Name="textBox15" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Make" Name="textBox16" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Mileage" Name="textBox17" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="5" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Model" Name="textBox18" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="6" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.PurchaseDate" Name="textBox19" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="7" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.PurchasePrice" Name="textBox20" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="8" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Status" Name="textBox21" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="9" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Trim" Name="textBox22" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="10" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.VIN" Name="textBox23" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="11" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Year" Name="textBox24" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+              <Column Width="0.8in" />
+            </Columns>
+            <Rows>
+              <Row Height="0.2in" />
+            </Rows>
+          </Body>
+          <Corner />
+          <RowGroups>
+            <TableGroup Name="detail">
+              <Groupings>
+                <Grouping />
+              </Groupings>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup Name="color">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Color" Name="textBox1" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="listDate">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="List Date" Name="textBox2" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="listPrice">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="List Price" Name="textBox3" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="make">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Make" Name="textBox4" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="mileage">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Mileage" Name="textBox5" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="model">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Model" Name="textBox6" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="purchaseDate">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Purchase Date" Name="textBox7" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="purchasePrice">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Purchase Price" Name="textBox8" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="status">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Status" Name="textBox9" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="trim">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Trim" Name="textBox10" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="vIN">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="VIN" Name="textBox11" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="year">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Year" Name="textBox12" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+          </ColumnGroups>
+        </Table>
+      </Items>
+    </DetailSection>
+    <PageHeaderSection Height="1in" Name="pageHeaderSection1">
+      <Items>
+        <TextBox Width="5.906in" Height="0.787in" Left="0in" Top="0in" Value="Report3" Name="ReportNameTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="14pt" Bold="True" />
+          </Style>
+        </TextBox>
+      </Items>
+    </PageHeaderSection>
+    <PageFooterSection Height="1in" Name="pageFooterSection1">
+      <Items>
+        <TextBox Width="1.575in" Height="0.394in" Left="8.025in" Top="0.606in" Value="Page: {PageNumber}" Name="ReportPageNumberTextBox">
+          <Style>
+            <Font Name="Segoe UI" />
+          </Style>
+        </TextBox>
+      </Items>
+    </PageFooterSection>
+  </Items>
+  <PageSettings PaperKind="Letter" Landscape="False" ColumnCount="1" ColumnSpacing="0in">
+    <Margins>
+      <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+    </Margins>
+  </PageSettings>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="0, 63, 89">
+        <Font Name="Segoe UI" Size="9pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="Table" StyleName="BlueOpal.TableNormal" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="0, 63, 89">
+        <Font Name="Segoe UI" Size="9pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="BlueOpal.TableBody" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="233, 244, 249" Color="0, 63, 89" VerticalAlign="Middle">
+        <Font Name="Segoe UI" Size="10pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="BlueOpal.TableHeader" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+</Report>

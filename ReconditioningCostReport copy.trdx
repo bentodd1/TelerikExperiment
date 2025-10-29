@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="11in" Name="ReconditioningCostReport" xmlns="http://schemas.telerik.com/reporting/2025/2.0">
+  <DataSources>
+    <CsvDataSource RecordSeparators="&#xD;&#xA;" FieldSeparators="," HasHeaders="True" Name="csvDataSource1">
+      <Source>
+        <Uri Path="reconditioning_costs.csv" />
+      </Source>
+      <Columns>
+        <DataColumn Name="VIN" />
+        <DataColumn Name="Year" />
+        <DataColumn Name="Make" />
+        <DataColumn Name="Model" />
+        <DataColumn Name="StockNumber" />
+        <DataColumn Name="DateReceived" />
+        <DataColumn Name="DateCompleted" />
+        <DataColumn Name="Status" />
+        <DataColumn Name="MechanicalEstimate" />
+        <DataColumn Name="MechanicalActual" />
+        <DataColumn Name="BodyWorkEstimate" />
+        <DataColumn Name="BodyWorkActual" />
+        <DataColumn Name="DetailingEstimate" />
+        <DataColumn Name="DetailingActual" />
+        <DataColumn Name="TiresEstimate" />
+        <DataColumn Name="TiresActual" />
+        <DataColumn Name="OtherEstimate" />
+        <DataColumn Name="OtherActual" />
+        <DataColumn Name="TotalEstimate" />
+        <DataColumn Name="TotalActual" />
+        <DataColumn Name="Variance" />
+      </Columns>
+    </CsvDataSource>
+  </DataSources>
+  <Items>
+    <PageHeaderSection Height="1.5in" Name="pageHeaderSection1">
+      <Items>
+        <TextBox Width="11in" Height="0.5in" Left="0in" Top="0.1in" Value="Reconditioning Cost Report" Name="titleTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="18pt" Bold="True" />
+            <TextAlign>Center</TextAlign>
+          </Style>
+        </TextBox>
+        <TextBox Width="11in" Height="0.4in" Left="0in" Top="0.6in" Value="Q3 2025 - Estimate vs Actual Analysis" Name="subtitleTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="14pt" />
+            <TextAlign>Center</TextAlign>
+          </Style>
+        </TextBox>
+      </Items>
+    </PageHeaderSection>
+    <DetailSection Height="0.5in" Name="detailSection1">
+      <Items>
+        <Table DataSourceName="csvDataSource1" Width="10.5in" Height="0.4in" Left="0.25in" Top="0in" Name="table1" StyleName="BlueOpal.TableNormal">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.StockNumber" Name="stockTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.5in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Year" Name="yearTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Make" Name="makeTextBox" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="1in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Model" Name="modelTextBox" StyleName="BlueOpal.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.MechanicalEstimate))" Name="mechEstTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="5" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.MechanicalActual))" Name="mechActTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="6" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.BodyWorkEstimate))" Name="bodyEstTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="7" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.BodyWorkActual))" Name="bodyActTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="8" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.TotalEstimate))" Name="totalEstTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                      <Font Bold="True" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="9" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.TotalActual))" Name="totalActTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                      <Font Bold="True" />
+                    </Style>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="10" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="= Format(&quot;{0:C}&quot;, CDbl(Fields.Variance))" Name="varianceTextBox" StyleName="BlueOpal.TableBody">
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                      <Font Bold="True" />
+                    </Style>
+                    <ConditionalFormatting>
+                      <FormattingRule>
+                        <Filters>
+                          <Filter Expression="= CDbl(Fields.Variance) &lt; 0" Operator="Equal" Value="= True" />
+                        </Filters>
+                        <Style>
+                          <Color>Red</Color>
+                        </Style>
+                      </FormattingRule>
+                      <FormattingRule>
+                        <Filters>
+                          <Filter Expression="= CDbl(Fields.Variance) &gt;= 0" Operator="Equal" Value="= True" />
+                        </Filters>
+                        <Style>
+                          <Color>Green</Color>
+                        </Style>
+                      </FormattingRule>
+                    </ConditionalFormatting>
+                  </TextBox>
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="0.8in" />
+              <Column Width="0.5in" />
+              <Column Width="0.8in" />
+              <Column Width="1in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+              <Column Width="0.9in" />
+            </Columns>
+            <Rows>
+              <Row Height="0.2in" />
+            </Rows>
+          </Body>
+          <Corner />
+          <RowGroups>
+            <TableGroup Name="detail">
+              <Groupings>
+                <Grouping />
+              </Groupings>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup Name="stock">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Stock #" Name="stockHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="year">
+              <ReportItem>
+                <TextBox Width="0.5in" Height="0.2in" Left="0in" Top="0in" Value="Year" Name="yearHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="make">
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Make" Name="makeHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="model">
+              <ReportItem>
+                <TextBox Width="1in" Height="0.2in" Left="0in" Top="0in" Value="Model" Name="modelHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="mechEst">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Mech Est" Name="mechEstHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="mechAct">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Mech Act" Name="mechActHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="bodyEst">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Body Est" Name="bodyEstHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="bodyAct">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Body Act" Name="bodyActHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="totalEst">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Total Est" Name="totalEstHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="totalAct">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Total Act" Name="totalActHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup Name="variance">
+              <ReportItem>
+                <TextBox Width="0.9in" Height="0.2in" Left="0in" Top="0in" Value="Variance" Name="varianceHeader" StyleName="BlueOpal.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+          </ColumnGroups>
+        </Table>
+      </Items>
+    </DetailSection>
+    <ReportFooterSection Height="6in" Name="reportFooterSection1">
+      <Items>
+        <TextBox Width="11in" Height="0.4in" Left="0in" Top="0.1in" Value="Q3 2025 Reconditioning Analysis Summary" Name="summaryTitleTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="14pt" Bold="True" />
+            <TextAlign>Center</TextAlign>
+            <BorderStyle Bottom="Solid" />
+            <BorderWidth Bottom="2pt" />
+            <BorderColor Bottom="0, 63, 89" />
+            <Color>0, 63, 89</Color>
+          </Style>
+        </TextBox>
+
+        <!-- Key Insights Text -->
+        <TextBox Width="5in" Height="0.3in" Left="0.25in" Top="0.7in" Value="KEY INSIGHTS" Name="keyInsightsHeader">
+          <Style>
+            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Color>0, 63, 89</Color>
+          </Style>
+        </TextBox>
+
+        <TextBox Width="5in" Height="1.8in" Left="0.25in" Top="1.1in" Value="This report tracks the accuracy of our reconditioning cost estimates versus actual expenses incurred during Q3 2025. Understanding variance patterns helps improve future budgeting and identify cost control opportunities.&#xA;&#xA;Positive variances (green) indicate we came in under budget, while negative variances (red) show where actual costs exceeded estimates. Consistent tracking enables better resource allocation and vendor negotiations." Name="insightsText">
+          <Style>
+            <Font Name="Segoe UI" Size="9pt" />
+            <Color>64, 64, 64</Color>
+            <VerticalAlign>Top</VerticalAlign>
+            <Padding Left="5pt" Right="5pt" Top="5pt" Bottom="5pt" />
+            <BackgroundColor>250, 250, 250</BackgroundColor>
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="1pt" />
+            <BorderColor Default="220, 220, 220" />
+          </Style>
+        </TextBox>
+
+        <!-- Visual Summary Box (Chart Placeholder) -->
+        <Panel Width="5in" Height="2.5in" Left="5.75in" Top="0.7in" Name="chartPanel">
+          <Items>
+            <TextBox Width="5in" Height="0.35in" Left="0in" Top="0in" Value="COST ANALYSIS SUMMARY" Name="chartTitle">
+              <Style>
+                <Font Name="Segoe UI" Size="12pt" Bold="True" />
+                <Color>0, 63, 89</Color>
+                <TextAlign>Center</TextAlign>
+                <BackgroundColor>233, 244, 249</BackgroundColor>
+                <Padding Left="5pt" Right="5pt" Top="5pt" Bottom="5pt" />
+              </Style>
+            </TextBox>
+            <TextBox Width="4.8in" Height="1.8in" Left="0.1in" Top="0.4in" Value="Based on 20 completed reconditioning jobs:&#xD;&#xA;&#xD;&#xA;• Total Estimated: $52,850&#xD;&#xA;• Total Actual: $56,475&#xD;&#xA;• Variance: -$3,625 (6.8% over estimate)&#xD;&#xA;&#xD;&#xA;Largest Overruns:&#xD;&#xA;  - Ford Mustang: -$1,050&#xD;&#xA;  - BMW 3 Series: -$750&#xD;&#xA;  - Land Rover Evoque: -$750&#xD;&#xA;&#xD;&#xA;Best Performers:&#xD;&#xA;  - Ford F-150: +$175&#xD;&#xA;  - Acura TLX: +$175" Name="summaryData">
+              <Style>
+                <Font Name="Segoe UI" Size="9pt" />
+                <Color>0, 63, 89</Color>
+                <Padding Left="10pt" Right="10pt" Top="10pt" Bottom="10pt" />
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+          </Items>
+          <Style>
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="1pt" />
+            <BorderColor Default="187, 220, 235" />
+            <BackgroundColor>White</BackgroundColor>
+          </Style>
+        </Panel>
+
+        <!-- Statistics Box -->
+        <TextBox Width="5in" Height="0.3in" Left="0.25in" Top="3.2in" Value="PERFORMANCE METRICS" Name="metricsHeader">
+          <Style>
+            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Color>0, 63, 89</Color>
+          </Style>
+        </TextBox>
+
+        <Panel Width="5in" Height="1.5in" Left="0.25in" Top="3.6in" Name="statsPanel">
+          <Items>
+            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.1in" Value="TOTAL VEHICLES RECONDITIONED" Name="totalVehiclesLabel">
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Color>100, 100, 100</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.3in" Value="20" Name="totalVehiclesValue">
+              <Style>
+                <Font Name="Segoe UI" Size="24pt" Bold="True" />
+                <Color>0, 63, 89</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+
+            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.1in" Value="AVERAGE ACTUAL COST" Name="avgCostLabel">
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Color>100, 100, 100</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.3in" Value="$2,850" Name="avgCostValue">
+              <Style>
+                <Font Name="Segoe UI" Size="24pt" Bold="True" />
+                <Color>0, 63, 89</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+
+            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.9in" Value="TOTAL VARIANCE" Name="totalVarianceLabel">
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Color>100, 100, 100</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="1.2in" Value="-$3,625" Name="totalVarianceValue">
+              <Style>
+                <Font Name="Segoe UI" Size="20pt" Bold="True" />
+                <Color>Red</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+
+            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.9in" Value="ESTIMATE ACCURACY" Name="accuracyLabel">
+              <Style>
+                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Color>100, 100, 100</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="1.2in" Value="92.8%" Name="accuracyValue">
+              <Style>
+                <Font Name="Segoe UI" Size="20pt" Bold="True" />
+                <Color>34, 139, 34</Color>
+                <TextAlign>Center</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </TextBox>
+          </Items>
+          <Style>
+            <BackgroundColor>250, 250, 250</BackgroundColor>
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="1pt" />
+            <BorderColor Default="220, 220, 220" />
+          </Style>
+        </Panel>
+
+        <!-- Recommendations Box -->
+        <TextBox Width="5in" Height="0.3in" Left="5.75in" Top="3.5in" Value="RECOMMENDATIONS" Name="recommendationsHeader">
+          <Style>
+            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Color>0, 63, 89</Color>
+          </Style>
+        </TextBox>
+
+        <TextBox Width="5in" Height="1.3in" Left="5.75in" Top="3.9in" Value="• Review high-variance vehicles to identify estimation gaps&#xA;• Focus on body work estimates - showing largest variances&#xA;• Maintain strong performance on mechanical estimates&#xA;• Consider vendor pricing updates for Q4 2025&#xA;• Continue tracking to improve forecast accuracy" Name="recommendationsText">
+          <Style>
+            <Font Name="Segoe UI" Size="9pt" />
+            <Color>64, 64, 64</Color>
+            <VerticalAlign>Top</VerticalAlign>
+            <Padding Left="10pt" Right="5pt" Top="5pt" Bottom="5pt" />
+            <BackgroundColor>255, 250, 240</BackgroundColor>
+            <BorderStyle Default="Solid" />
+            <BorderWidth Default="1pt" />
+            <BorderColor Default="255, 200, 100" />
+          </Style>
+        </TextBox>
+
+      </Items>
+    </ReportFooterSection>
+    <PageFooterSection Height="0.5in" Name="pageFooterSection1">
+      <Items>
+        <TextBox Width="3.5in" Height="0.3in" Left="0in" Top="0.1in" Value="= 'Generated: ' + Now().ToString(&quot;MM/dd/yyyy&quot;)" Name="dateTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="9pt" />
+            <TextAlign>Left</TextAlign>
+          </Style>
+        </TextBox>
+        <TextBox Width="4in" Height="0.3in" Left="3.5in" Top="0.1in" Value="= 'Page ' + PageNumber + ' of ' + PageCount" Name="pageNumberTextBox">
+          <Style>
+            <Font Name="Segoe UI" Size="9pt" />
+            <TextAlign>Center</TextAlign>
+          </Style>
+        </TextBox>
+        <PictureBox Value="https://pro.vincue.com/images/VincueLogo_Black.png" Width="1in" Height="0.365in" Left="9.75in" Top="0.067in" Sizing="ScaleProportional" MimeType="" Name="vincueLogo" />
+      </Items>
+    </PageFooterSection>
+  </Items>
+  <PageSettings PaperKind="Letter" Landscape="True" ColumnCount="1" ColumnSpacing="0in">
+    <Margins>
+      <MarginsU Left="0.5in" Right="0.5in" Top="0.5in" Bottom="0.5in" />
+    </Margins>
+  </PageSettings>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="0, 63, 89">
+        <Font Name="Segoe UI" Size="9pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="Table" StyleName="BlueOpal.TableNormal" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="0, 63, 89">
+        <Font Name="Segoe UI" Size="9pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="BlueOpal.TableBody" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="233, 244, 249" Color="0, 63, 89" VerticalAlign="Middle">
+        <Font Name="Segoe UI" Size="10pt" />
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="187, 220, 235" />
+        <BorderWidth Default="1px" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="BlueOpal.TableHeader" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+</Report>
