@@ -250,11 +250,11 @@
         </Table>
       </Items>
     </DetailSection>
-    <ReportFooterSection Height="6in" Name="reportFooterSection1">
+    <ReportFooterSection Height="4.3in" Name="reportFooterSection1">
       <Items>
-        <TextBox Width="11in" Height="0.4in" Left="0in" Top="0.1in" Value="Q3 2025 Reconditioning Analysis Summary" Name="summaryTitleTextBox">
+        <TextBox Width="10in" Height="0.25in" Left="0in" Top="0in" Value="Q3 2025 Reconditioning Analysis Summary" Name="summaryTitleTextBox">
           <Style>
-            <Font Name="Segoe UI" Size="14pt" Bold="True" />
+            <Font Name="Segoe UI" Size="13pt" Bold="True" />
             <TextAlign>Center</TextAlign>
             <BorderStyle Bottom="Solid" />
             <BorderWidth Bottom="2pt" />
@@ -264,14 +264,14 @@
         </TextBox>
 
         <!-- Key Insights Text -->
-        <TextBox Width="5in" Height="0.3in" Left="0.25in" Top="0.7in" Value="KEY INSIGHTS" Name="keyInsightsHeader">
+        <TextBox Width="4.6in" Height="0.25in" Left="0.25in" Top="0.35in" Value="KEY INSIGHTS" Name="keyInsightsHeader">
           <Style>
-            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Font Name="Segoe UI" Size="10pt" Bold="True" />
             <Color>0, 63, 89</Color>
           </Style>
         </TextBox>
 
-        <TextBox Width="5in" Height="1.8in" Left="0.25in" Top="1.1in" Value="This report tracks the accuracy of our reconditioning cost estimates versus actual expenses incurred during Q3 2025. Understanding variance patterns helps improve future budgeting and identify cost control opportunities.&#xA;&#xA;Positive variances (green) indicate we came in under budget, while negative variances (red) show where actual costs exceeded estimates. Consistent tracking enables better resource allocation and vendor negotiations." Name="insightsText">
+        <TextBox Width="4.6in" Height="1.2in" Left="0.25in" Top="0.63in" Value="This report tracks the accuracy of our reconditioning cost estimates versus actual expenses incurred during Q3 2025. Understanding variance patterns helps improve future budgeting and identify cost control opportunities.&#xA;&#xA;Positive variances (green) indicate we came in under budget, while negative variances (red) show where actual costs exceeded estimates. Consistent tracking enables better resource allocation and vendor negotiations." Name="insightsText">
           <Style>
             <Font Name="Segoe UI" Size="9pt" />
             <Color>64, 64, 64</Color>
@@ -285,14 +285,16 @@
         </TextBox>
 
         <!-- Costs by Year Section -->
-        <TextBox Width="5in" Height="0.3in" Left="5.75in" Top="0.7in" Value="COSTS BY YEAR" Name="costsByYearHeader">
-          <Style>
-            <Font Name="Segoe UI" Size="11pt" Bold="True" />
-            <Color>0, 63, 89</Color>
-          </Style>
-        </TextBox>
+        <Panel Width="4.85in" Height="2.05in" Left="5.15in" Top="0.35in" Name="costsByYearPanel">
+          <Items>
+            <TextBox Width="4.85in" Height="0.25in" Left="0in" Top="0in" Value="COSTS BY YEAR" Name="costsByYearHeader">
+              <Style>
+                <Font Name="Segoe UI" Size="10pt" Bold="True" />
+                <Color>0, 63, 89</Color>
+              </Style>
+            </TextBox>
 
-        <Graph DataSourceName="csvDataSource1" Width="5in" Height="2.1in" Left="5.75in" Top="1.1in" Name="costsByYearChart">
+            <Graph DataSourceName="csvDataSource1" Width="4.85in" Height="1.75in" Left="0in" Top="0.3in" Name="costsByYearChart">
           <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
           <Axes>
             <GraphAxis Name="graphAxis1">
@@ -356,79 +358,82 @@
             </GraphTitle>
           </Titles>
         </Graph>
+          </Items>
+          <KeepTogether>True</KeepTogether>
+        </Panel>
 
         <!-- Statistics Box -->
-        <TextBox Width="5in" Height="0.3in" Left="0.25in" Top="3.2in" Value="PERFORMANCE METRICS" Name="metricsHeader">
+        <TextBox Width="4.6in" Height="0.25in" Left="0.25in" Top="2.05in" Value="PERFORMANCE METRICS" Name="metricsHeader">
           <Style>
-            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Font Name="Segoe UI" Size="10pt" Bold="True" />
             <Color>0, 63, 89</Color>
           </Style>
         </TextBox>
 
-        <Panel Width="5in" Height="1.5in" Left="0.25in" Top="3.6in" Name="statsPanel">
+        <Panel Width="4.6in" Height="1.2in" Left="0.25in" Top="2.35in" Name="statsPanel">
           <Items>
-            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.1in" Value="TOTAL VEHICLES RECONDITIONED" Name="totalVehiclesLabel">
+            <TextBox Width="2.15in" Height="0.5in" Left="0.1in" Top="0.05in" Value="TOTAL VEHICLES RECONDITIONED" Name="totalVehiclesLabel">
               <Style>
-                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Font Name="Segoe UI" Size="7pt" Bold="True" />
                 <Color>100, 100, 100</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
-            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.3in" Value="20" Name="totalVehiclesValue">
+            <TextBox Width="2.15in" Height="0.5in" Left="0.1in" Top="0.25in" Value="20" Name="totalVehiclesValue">
               <Style>
-                <Font Name="Segoe UI" Size="24pt" Bold="True" />
+                <Font Name="Segoe UI" Size="18pt" Bold="True" />
                 <Color>0, 63, 89</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
 
-            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.1in" Value="AVERAGE ACTUAL COST" Name="avgCostLabel">
+            <TextBox Width="2.15in" Height="0.5in" Left="2.35in" Top="0.05in" Value="AVERAGE ACTUAL COST" Name="avgCostLabel">
               <Style>
-                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Font Name="Segoe UI" Size="7pt" Bold="True" />
                 <Color>100, 100, 100</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
-            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.3in" Value="$2,850" Name="avgCostValue">
+            <TextBox Width="2.15in" Height="0.5in" Left="2.35in" Top="0.25in" Value="$2,850" Name="avgCostValue">
               <Style>
-                <Font Name="Segoe UI" Size="24pt" Bold="True" />
+                <Font Name="Segoe UI" Size="18pt" Bold="True" />
                 <Color>0, 63, 89</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
 
-            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="0.9in" Value="TOTAL VARIANCE" Name="totalVarianceLabel">
+            <TextBox Width="2.15in" Height="0.5in" Left="0.1in" Top="0.7in" Value="TOTAL VARIANCE" Name="totalVarianceLabel">
               <Style>
-                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Font Name="Segoe UI" Size="7pt" Bold="True" />
                 <Color>100, 100, 100</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
-            <TextBox Width="2.3in" Height="0.6in" Left="0.1in" Top="1.2in" Value="-$3,625" Name="totalVarianceValue">
+            <TextBox Width="2.15in" Height="0.5in" Left="0.1in" Top="0.9in" Value="-$3,625" Name="totalVarianceValue">
               <Style>
-                <Font Name="Segoe UI" Size="20pt" Bold="True" />
+                <Font Name="Segoe UI" Size="16pt" Bold="True" />
                 <Color>Red</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
 
-            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="0.9in" Value="ESTIMATE ACCURACY" Name="accuracyLabel">
+            <TextBox Width="2.15in" Height="0.5in" Left="2.35in" Top="0.7in" Value="ESTIMATE ACCURACY" Name="accuracyLabel">
               <Style>
-                <Font Name="Segoe UI" Size="8pt" Bold="True" />
+                <Font Name="Segoe UI" Size="7pt" Bold="True" />
                 <Color>100, 100, 100</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </TextBox>
-            <TextBox Width="2.3in" Height="0.6in" Left="2.6in" Top="1.2in" Value="92.8%" Name="accuracyValue">
+            <TextBox Width="2.15in" Height="0.5in" Left="2.35in" Top="0.9in" Value="92.8%" Name="accuracyValue">
               <Style>
-                <Font Name="Segoe UI" Size="20pt" Bold="True" />
+                <Font Name="Segoe UI" Size="16pt" Bold="True" />
                 <Color>34, 139, 34</Color>
                 <TextAlign>Center</TextAlign>
                 <VerticalAlign>Top</VerticalAlign>
@@ -444,14 +449,14 @@
         </Panel>
 
         <!-- Recommendations Box -->
-        <TextBox Width="5in" Height="0.3in" Left="5.75in" Top="3.5in" Value="RECOMMENDATIONS" Name="recommendationsHeader">
+        <TextBox Width="4.85in" Height="0.25in" Left="5.15in" Top="2.6in" Value="RECOMMENDATIONS" Name="recommendationsHeader">
           <Style>
-            <Font Name="Segoe UI" Size="11pt" Bold="True" />
+            <Font Name="Segoe UI" Size="10pt" Bold="True" />
             <Color>0, 63, 89</Color>
           </Style>
         </TextBox>
 
-        <TextBox Width="5in" Height="1.3in" Left="5.75in" Top="3.9in" Value="• Review high-variance vehicles to identify estimation gaps&#xA;• Focus on body work estimates - showing largest variances&#xA;• Maintain strong performance on mechanical estimates&#xA;• Consider vendor pricing updates for Q4 2025&#xA;• Continue tracking to improve forecast accuracy" Name="recommendationsText">
+        <TextBox Width="4.85in" Height="0.95in" Left="5.15in" Top="2.9in" Value="• Review high-variance vehicles to identify estimation gaps&#xA;• Focus on body work estimates - showing largest variances&#xA;• Maintain strong performance on mechanical estimates&#xA;• Consider vendor pricing updates for Q4 2025&#xA;• Continue tracking to improve forecast accuracy" Name="recommendationsText">
           <Style>
             <Font Name="Segoe UI" Size="9pt" />
             <Color>64, 64, 64</Color>
@@ -468,19 +473,19 @@
     </ReportFooterSection>
     <PageFooterSection Height="0.5in" Name="pageFooterSection1">
       <Items>
-        <TextBox Width="3.5in" Height="0.3in" Left="0in" Top="0.1in" Value="= 'Generated: ' + Now().ToString(&quot;MM/dd/yyyy&quot;)" Name="dateTextBox">
+        <TextBox Width="3in" Height="0.3in" Left="0in" Top="0.1in" Value="= 'Generated: ' + Now().ToString(&quot;MM/dd/yyyy&quot;)" Name="dateTextBox">
           <Style>
             <Font Name="Segoe UI" Size="9pt" />
             <TextAlign>Left</TextAlign>
           </Style>
         </TextBox>
-        <TextBox Width="4in" Height="0.3in" Left="3.5in" Top="0.1in" Value="= 'Page ' + PageNumber + ' of ' + PageCount" Name="pageNumberTextBox">
+        <TextBox Width="4in" Height="0.3in" Left="3in" Top="0.1in" Value="= 'Page ' + PageNumber + ' of ' + PageCount" Name="pageNumberTextBox">
           <Style>
             <Font Name="Segoe UI" Size="9pt" />
             <TextAlign>Center</TextAlign>
           </Style>
         </TextBox>
-        <PictureBox Value="https://pro.vincue.com/images/VincueLogo_Black.png" Width="1in" Height="0.365in" Left="9.75in" Top="0.067in" Sizing="ScaleProportional" MimeType="" Name="vincueLogo" />
+        <PictureBox Value="https://pro.vincue.com/images/VincueLogo_Black.png" Width="1in" Height="0.365in" Left="9in" Top="0.067in" Sizing="ScaleProportional" MimeType="" Name="vincueLogo" />
       </Items>
     </PageFooterSection>
   </Items>

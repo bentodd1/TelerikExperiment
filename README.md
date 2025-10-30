@@ -392,7 +392,7 @@ Standard footer layout uses a three-column design:
     <PictureBox Value="https://pro.vincue.com/images/VincueLogo_Black.png"
                 Width="1in"
                 Height="0.365in"
-                Left="9.75in"
+                Left="9in"
                 Top="0.067in"
                 Sizing="ScaleProportional"
                 MimeType=""
@@ -404,9 +404,103 @@ Standard footer layout uses a three-column design:
 **Key Points:**
 - Logo URL: `https://pro.vincue.com/images/VincueLogo_Black.png`
 - `Sizing="ScaleProportional"` maintains aspect ratio
-- Position logo at `Left="9.75in"` for right alignment on landscape reports
+- Position logo at `Left="9in"` for right alignment on landscape reports (9in + 1in width = 10in, fits perfectly in usable area)
 - Generated date uses `Now().ToString("MM/dd/yyyy")` expression
 - All three elements should be in `PageFooterSection`, not `PageHeaderSection`
+
+## PDF Export: Sizing and Layout Best Practices
+
+### Understanding Usable Page Area
+
+When designing reports for PDF export, you must account for the **usable page area**, which is the space available after margins are subtracted from the paper size.
+
+**Formula for Letter Landscape (most common):**
+- Paper size: 11in × 8.5in
+- Margins: 0.5in on all sides (typical)
+- **Usable Width** = 11in - 0.5in (left) - 0.5in (right) = **10in**
+- **Usable Height** = 8.5in - 0.5in (top) - 0.5in (bottom) = **7.5in**
+
+**For Detail/Report Footer sections:**
+- Available height per page = 7.5in - PageHeader height - PageFooter height
+- Example: 7.5in - 1.5in (header) - 0.5in (footer) = **5.5in per page**
+
+### Critical Sizing Rules
+
+1. **All report items must fit within usable width** - Never exceed 10in for Letter landscape with 0.5in margins
+2. **Account for Left position** - If an item has `Left="0.25in"`, its width must be ≤ 9.75in
+3. **Header TextBoxes should be 10in wide** (not 11in) to fit in usable area
+4. **Tables must fit** - Ensure `Left + Width ≤ 10in` for the table
+5. **Page Footer elements must fit** - Logo at `Left="9in"` with `Width="1in"` = 10in total
+
+### Common PDF Export Issues and Fixes
+
+**Issue**: "Pages are off" or content appears cut off in PDF
+- **Cause**: Components exceed usable page width (10in for Letter landscape)
+- **Fix**: Resize all components to fit within usable width
+  - Headers/Titles: Change from 11in to 10in
+  - Tables: Adjust width and position (e.g., 9.5in at Left="0.25in" = 9.75in total)
+  - Footer logo: Position at Left="9in" (not 9.75in)
+
+**Issue**: Content appears on wrong pages or splits unexpectedly
+- **Cause**: ReportFooterSection height exceeds available space per page
+- **Fix**: This is normal behavior - sections can span multiple pages. Design with this in mind.
+
+**Issue**: Header label separated from its chart on different pages
+- **Cause**: Header and chart are positioned separately, allowing page breaks between them
+- **Fix**: Wrap related items in a Panel with `KeepTogether="True"`:
+  ```xml
+  <Panel Width="5in" Height="2.5in" Left="5.75in" Top="0.7in" Name="chartPanel">
+    <Items>
+      <TextBox Width="5in" Height="0.3in" Left="0in" Top="0in" Value="CHART TITLE" />
+      <Graph Width="5in" Height="2.1in" Left="0in" Top="0.4in" ... />
+    </Items>
+    <KeepTogether>True</KeepTogether>
+  </Panel>
+  ```
+  This prevents page breaks from splitting the header and chart.
+
+**Issue**: Horizontal overflow creating blank pages
+- **Cause**: Items positioned beyond usable width force horizontal pagination
+- **Fix**: Use the formula: `Left position + Width ≤ 10in` for all items
+
+**Issue**: Report spans too many pages with excessive white space
+- **Cause**: Elements in ReportFooterSection positioned with too much vertical spacing
+- **Fix**: Tighten up vertical positioning and reduce section height:
+  - Reduce gaps between elements (e.g., change Top from 0.7in to 0.55in)
+  - Reduce TextBox heights where content allows (e.g., 1.8in to 1.5in)
+  - Move sections closer together (e.g., PERFORMANCE METRICS from 3.2in to 2.55in)
+  - Reduce overall ReportFooterSection height (e.g., from 6in to 5in)
+  - Align left and right column elements to end at similar vertical positions to optimize page breaks
+
+### Design-Time Validation Checklist
+
+Before exporting to PDF, verify:
+- [ ] All TextBoxes: `Left + Width ≤ 10in`
+- [ ] Tables: `Left + Width ≤ 10in`
+- [ ] Page footer elements: Rightmost element ends at ≤ 10in
+- [ ] Chart widths: Fit within 10in usable area
+- [ ] Panel positions: Check all nested items fit
+- [ ] Run `xmllint --noout yourfile.trdx` to validate XML syntax
+
+### Iterative PDF Testing Process
+
+Telerik recommends an iterative approach:
+1. Design report in Report Designer
+2. Export to PDF
+3. Review the PDF output
+4. Adjust sizing/positioning in Report Designer
+5. Repeat until output is correct
+
+Use this formula repeatedly: **Usable Width = Paper Width - Left Margin - Right Margin**
+
+### Optimizing Page Count
+
+To minimize unnecessary pages and white space:
+1. **Tighten vertical spacing** - Reduce gaps between elements (use 0.05-0.15in gaps instead of 0.3-0.4in)
+2. **Reduce TextBox heights** - Size boxes to fit content, not larger
+3. **Compact ReportFooterSection** - Aim for the smallest height that accommodates your content
+4. **Align column heights** - When using side-by-side columns, try to make them end at similar vertical positions
+5. **Use KeepTogether sparingly** - Only use on critical grouped content, as it can force extra page breaks
 
 ## Tips for Creating Reports
 
@@ -421,6 +515,7 @@ Standard footer layout uses a three-column design:
 9. **Logo and date go in footer, not header** - Always place the Vincue logo and "Generated" date in PageFooterSection for consistent branding
 10. **For charts, use proper Graph XML syntax** - See "Creating Charts and Graphs" section for complete examples and common error fixes
 11. **Add DataSourceName to footer aggregates** - When using aggregate functions in ReportFooterSection, always add `DataSourceName="yourDataSourceName"` attribute to the TextBox (note: this may not work reliably - see Aggregates section above)
+12. **Always design for usable page area, not paper size** - See "PDF Export: Sizing and Layout Best Practices" section above
 
 ## Troubleshooting Common Issues
 
