@@ -284,106 +284,66 @@
           </Style>
         </TextBox>
 
-        <!-- Chart Title -->
-        <TextBox Width="5in" Height="0.35in" Left="5.75in" Top="0.7in" Value="COST SUMMARY" Name="chartTitleBox">
-          <Style>
-            <Font Name="Segoe UI" Size="12pt" Bold="True" />
-            <Color>0, 63, 89</Color>
-            <TextAlign>Center</TextAlign>
-            <BackgroundColor>233, 244, 249</BackgroundColor>
-            <Padding Left="5pt" Right="5pt" Top="5pt" Bottom="5pt" />
-          </Style>
-        </TextBox>
-
-        <!-- Bar Chart: Estimate vs Actual -->
-        <Graph DataSourceName="csvDataSource1" Width="5in" Height="2.5in" Left="5.75in" Top="1.1in" Name="costComparisonChart">
-          <PlotAreaStyle>
-            <BackgroundColor>White</BackgroundColor>
-          </PlotAreaStyle>
+        <!-- Costs by Year Chart -->
+        <Graph DataSourceName="csvDataSource1" Width="5in" Height="2.5in" Left="5.75in" Top="0.7in" Name="costsByYearChart">
+          <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
           <Axes>
-            <GraphAxis Name="categoryAxis">
-              <MajorGridLineStyle Visible="False" />
-              <Style>
-                <Font Name="Segoe UI" Size="8pt" />
-              </Style>
+            <GraphAxis Name="graphAxis1">
+              <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
+              <Scale>
+                <NumericalScale Minimum="0" />
+              </Scale>
+            </GraphAxis>
+            <GraphAxis Name="graphAxis2">
+              <MajorGridLineStyle LineWidth="1px" LineColor="LightGray" />
+              <MinorGridLineStyle Visible="False" LineWidth="1px" LineColor="LightGray" />
               <Scale>
                 <CategoryScale />
               </Scale>
             </GraphAxis>
-            <GraphAxis Name="valueAxis">
-              <MajorGridLineStyle LineColor="200, 200, 200" />
-              <Style>
-                <Font Name="Segoe UI" Size="8pt" />
-              </Style>
-              <Scale>
-                <NumericalScale />
-              </Scale>
-            </GraphAxis>
           </Axes>
           <CoordinateSystems>
-            <CartesianCoordinateSystem XAxis="categoryAxis" YAxis="valueAxis" Name="cartesianCoordinateSystem1" />
+            <CartesianCoordinateSystem XAxis="graphAxis1" YAxis="graphAxis2" Name="cartesianCoordinateSystem1" />
           </CoordinateSystems>
+          <Legend>
+            <Style LineWidth="0in" LineColor="LightGray" />
+          </Legend>
+          <Style>
+            <Padding Left="10px" Right="10px" Top="10px" Bottom="10px" />
+          </Style>
           <SeriesGroups>
-            <GraphGroup Name="seriesGroup">
-              <Groupings>
-                <Grouping />
-              </Groupings>
-            </GraphGroup>
+            <GraphGroup Name="seriesGroup1" />
           </SeriesGroups>
           <CategoryGroups>
-            <GraphGroup Name="categoryGroup">
+            <GraphGroup Name="categoryGroup1">
               <Groupings>
-                <Grouping>="Total"</Grouping>
+                <Grouping Expression="= Fields.Year" />
               </Groupings>
+              <Sortings>
+                <Sorting Expression="= Fields.Year" Direction="Asc" />
+              </Sortings>
             </GraphGroup>
           </CategoryGroups>
           <Series>
-            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="seriesGroup" Y="=Sum(CDbl(Fields.TotalEstimate))" ArrangeMode="Clustered" Name="estimateSeries">
-              <LegendItem>
-                <Value>Estimated Cost</Value>
-              </LegendItem>
-              <DataPointStyle LineWidth="0cm" />
-              <DataPointConditionalFormatting>
-                <FormattingRule>
-                  <Filters>
-                    <Filter Expression="= True" Operator="Equal" Value="= True" />
-                  </Filters>
-                  <Style>
-                    <BackgroundColor>70, 130, 180</BackgroundColor>
-                  </Style>
-                </FormattingRule>
-              </DataPointConditionalFormatting>
-              <DataPointLabelStyle Visible="False" />
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="categoryGroup1" SeriesGroup="seriesGroup1" X="= Sum(CDbl(Fields.TotalActual))" DataPointLabel="= Format(&quot;{0:C0}&quot;, Sum(CDbl(Fields.TotalActual)))" Name="barSeries1">
+              <DataPointStyle Visible="True" LineWidth="0in" />
+              <DataPointLabelStyle Visible="True" />
+              <LegendItem Value="'Total Actual'" />
+              <MergedDataPoints />
             </BarSeries>
-            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="categoryGroup" SeriesGroup="seriesGroup" Y="=Sum(CDbl(Fields.TotalActual))" ArrangeMode="Clustered" Name="actualSeries">
-              <LegendItem>
-                <Value>Actual Cost</Value>
-              </LegendItem>
-              <DataPointStyle LineWidth="0cm" />
-              <DataPointConditionalFormatting>
-                <FormattingRule>
-                  <Filters>
-                    <Filter Expression="= True" Operator="Equal" Value="= True" />
-                  </Filters>
-                  <Style>
-                    <BackgroundColor>34, 139, 34</BackgroundColor>
-                  </Style>
-                </FormattingRule>
-              </DataPointConditionalFormatting>
-              <DataPointLabelStyle Visible="False" />
+            <BarSeries CoordinateSystem="cartesianCoordinateSystem1" CategoryGroup="categoryGroup1" SeriesGroup="seriesGroup1" X="= Sum(CDbl(Fields.TotalEstimate))" DataPointLabel="= Format(&quot;{0:C0}&quot;, Sum(CDbl(Fields.TotalEstimate)))" Name="barSeries2">
+              <DataPointStyle Visible="True" LineWidth="0in" />
+              <DataPointLabelStyle Visible="True" />
+              <LegendItem Value="'Total Estimate'" />
+              <MergedDataPoints />
             </BarSeries>
           </Series>
-          <Legend>
-            <Style>
-              <Font Name="Segoe UI" Size="9pt" />
-              <Padding Left="5pt" Right="5pt" Top="5pt" Bottom="5pt" />
-            </Style>
-          </Legend>
-          <Style>
-            <BorderStyle Default="Solid" />
-            <BorderWidth Default="1pt" />
-            <BorderColor Default="187, 220, 235" />
-          </Style>
+          <Titles>
+            <GraphTitle Text="Total Costs by Vehicle Year" Position="TopCenter">
+              <Style LineWidth="0in" LineColor="LightGray" />
+            </GraphTitle>
+          </Titles>
         </Graph>
 
         <!-- Statistics Box -->

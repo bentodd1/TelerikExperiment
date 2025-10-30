@@ -6,6 +6,11 @@ This project contains Telerik Report definitions for vehicle inventory and other
 
 - **VehicleInventoryReport.trdx** - Q3 2025 Vehicle Inventory Report with pricing and margin analysis
 - **vehicle_inventory.csv** - Sample data source for vehicle inventory
+- **ReconditioningCostReport.trdx** - Q3 2025 Reconditioning Cost Report with year-based analysis
+  - Features bar chart grouped by vehicle year
+  - Shows Total Actual vs Total Estimate costs side-by-side
+  - Includes visible data point labels with currency formatting
+  - Data source: reconditioning_costs.csv
 
 ## Telerik Report Schema Information
 
@@ -398,6 +403,162 @@ Standard footer layout uses a three-column design:
 9. **Logo and date go in footer, not header** - Always place the Vincue logo and "Generated" date in PageFooterSection for consistent branding
 10. **For charts, use proper Graph XML syntax** - See "Creating Charts and Graphs" section for complete examples and common error fixes
 11. **Add DataSourceName to footer aggregates** - When using aggregate functions in ReportFooterSection, always add `DataSourceName="yourDataSourceName"` attribute to the TextBox (note: this may not work reliably - see Aggregates section above)
+
+## Troubleshooting Common Issues
+
+### File Corruption After Git Operations
+
+**Symptom**: Report file that was working fine starts crashing or throwing errors after git operations (checkout, revert, etc.), even though `git diff` shows no changes.
+
+**Cause**: Potential file corruption during git operations, possibly related to line endings or binary encoding issues.
+
+**Solution**:
+```bash
+# Extract a fresh copy from git
+git show HEAD:ReconditioningCostReport.trdx > ReconditioningCostReport_fresh.trdx
+
+# Test the fresh copy first
+# If it works, replace the corrupted file
+mv ReconditioningCostReport.trdx ReconditioningCostReport_corrupted.trdx
+mv ReconditioningCostReport_fresh.trdx ReconditioningCostReport.trdx
+```
+
+**Prevention**: Always test reports in Telerik after any git operations before making further changes.
+
+### Chart NullReferenceException Errors
+
+**Symptom**: Report throws `System.NullReferenceException: Object reference not set to an instance of an object` when opening.
+
+**Common Causes**:
+
+1. **Malformed Grouping Expression**
+   ```xml
+   <!-- WRONG - This causes NullReferenceException -->
+   <Grouping>="Total"</Grouping>
+
+   <!-- CORRECT - Empty grouping -->
+   <Grouping />
+
+   <!-- CORRECT - Field-based grouping -->
+   <Grouping Expression="= Fields.Year" />
+   ```
+
+2. **Missing or Incorrect Category Grouping**
+   ```xml
+   <!-- For charts grouped by a field, use this pattern: -->
+   <CategoryGroups>
+     <GraphGroup Name="categoryGroup1">
+       <Groupings>
+         <Grouping Expression="= Fields.Year" />
+       </Groupings>
+       <Sortings>
+         <Sorting Expression="= Fields.Year" Direction="Asc" />
+       </Sortings>
+     </GraphGroup>
+   </CategoryGroups>
+   ```
+
+3. **Data Type Mismatches** - Always use `CDbl()` to convert string fields to numbers:
+   ```xml
+   X="= Sum(CDbl(Fields.TotalActual))"
+   ```
+
+### Working with .trdp Files
+
+**.trdp files are ZIP archives** containing report definitions and resources. To inspect or extract:
+
+```bash
+# Extract contents
+unzip -o BarSeriesDataPointLabelAlignment.trdp -d extracted_folder
+
+# View structure
+unzip -l BarSeriesDataPointLabelAlignment.trdp
+```
+
+Contents typically include:
+- `definition.xml` - The actual report definition (equivalent to .trdx contents)
+- Data source files (CSV, etc.)
+- `[Content_Types].xml` - Package manifest
+
+This is useful when you need to reference working chart examples from .trdp files.
+
+### Charts Grouped by Field Values
+
+To create bar charts that group data by a field value (like Year) with visible labels:
+
+```xml
+<Graph DataSourceName="csvDataSource1" Width="5in" Height="2.5in" Name="chartByYear">
+  <PlotAreaStyle LineWidth="0in" LineColor="LightGray" />
+  <Axes>
+    <GraphAxis Name="graphAxis1">
+      <Scale><NumericalScale Minimum="0" /></Scale>
+    </GraphAxis>
+    <GraphAxis Name="graphAxis2">
+      <Scale><CategoryScale /></Scale>
+    </GraphAxis>
+  </Axes>
+  <CoordinateSystems>
+    <CartesianCoordinateSystem XAxis="graphAxis1" YAxis="graphAxis2" />
+  </CoordinateSystems>
+
+  <!-- Define Series Group (required) -->
+  <SeriesGroups>
+    <GraphGroup Name="seriesGroup1" />
+  </SeriesGroups>
+
+  <!-- Group by the field value -->
+  <CategoryGroups>
+    <GraphGroup Name="categoryGroup1">
+      <Groupings>
+        <Grouping Expression="= Fields.Year" />
+      </Groupings>
+      <Sortings>
+        <Sorting Expression="= Fields.Year" Direction="Asc" />
+      </Sortings>
+    </GraphGroup>
+  </CategoryGroups>
+
+  <!-- Multiple series for side-by-side bars -->
+  <Series>
+    <BarSeries CategoryGroup="categoryGroup1" SeriesGroup="seriesGroup1"
+               X="= Sum(CDbl(Fields.TotalActual))"
+               DataPointLabel="= Format(&quot;{0:C0}&quot;, Sum(CDbl(Fields.TotalActual)))">
+      <DataPointStyle Visible="True" LineWidth="0in" />
+      <DataPointLabelStyle Visible="True" />
+      <LegendItem Value="'Total Actual'" />
+    </BarSeries>
+    <BarSeries CategoryGroup="categoryGroup1" SeriesGroup="seriesGroup1"
+               X="= Sum(CDbl(Fields.TotalEstimate))"
+               DataPointLabel="= Format(&quot;{0:C0}&quot;, Sum(CDbl(Fields.TotalEstimate)))">
+      <DataPointStyle Visible="True" LineWidth="0in" />
+      <DataPointLabelStyle Visible="True" />
+      <LegendItem Value="'Total Estimate'" />
+    </BarSeries>
+  </Series>
+
+  <Titles>
+    <GraphTitle Text="Costs by Vehicle Year" Position="TopCenter">
+      <Style LineWidth="0in" LineColor="LightGray" />
+    </GraphTitle>
+  </Titles>
+</Graph>
+```
+
+**Key Points**:
+- Use `Expression="= Fields.FieldName"` in the Grouping element
+- Add Sortings to control the order of categories
+- Multiple BarSeries with the same CategoryGroup creates side-by-side bars
+- Set `DataPointLabelStyle Visible="True"` to show values on bars
+- Format labels with `Format("{0:C0}", ...)` for currency without decimals
+
+### Best Practices for Making Changes
+
+1. **Make incremental changes** - Change one thing at a time
+2. **Test after each change** - Open the report in Telerik Designer after every edit
+3. **Validate XML syntax** - Use `xmllint --noout file.trdx` to check for XML errors
+4. **Keep backups** - Save working versions before making complex changes
+5. **Use git commits** - Commit working versions frequently
+6. **Start simple** - Begin with minimal examples and add complexity gradually
 
 ## Resources
 
