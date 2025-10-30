@@ -502,6 +502,29 @@ To minimize unnecessary pages and white space:
 4. **Align column heights** - When using side-by-side columns, try to make them end at similar vertical positions
 5. **Use KeepTogether sparingly** - Only use on critical grouped content, as it can force extra page breaks
 
+### Balancing White Space
+
+After optimizing for page count, you may have excessive white space (especially at page bottoms). To achieve better visual balance:
+
+**Strategy: Expand components proportionally**
+1. **Increase section height** - Add height to ReportFooterSection (e.g., 4.3in → 5in)
+2. **Expand all text boxes** - Increase heights proportionally (e.g., 1.2in → 1.5in)
+3. **Enlarge charts/graphs** - Make visualizations bigger for better readability (e.g., 1.75in → 2.15in)
+4. **Increase font sizes** - Bump up headers and key metrics (e.g., 10pt → 11pt, 18pt → 22pt)
+5. **Add spacing between sections** - Increase Top positions to spread content vertically
+
+**Example from ReconditioningCostReport.trdx:**
+- ReportFooterSection expanded from 4.3in to 5in
+- KEY INSIGHTS text: 1.2in → 1.5in height
+- Chart: 1.75in → 2.15in height
+- Performance Metrics panel: 1.2in → 1.6in height
+- Metric values: 18pt → 22pt font size
+- All headers: 10pt → 11pt font size
+
+**Result**: Better visual balance with content distributed across available space while maintaining target page count.
+
+**Key Principle**: Once you've achieved the desired page count, incrementally expand components until white space is minimized but content doesn't overflow to extra pages. Test after each adjustment.
+
 ## Tips for Creating Reports
 
 1. **Always specify the correct schema version** - Use the version that matches your Report Designer installation
