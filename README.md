@@ -323,6 +323,24 @@ Charts in Telerik Reporting require specific XML syntax. Follow these guidelines
 - **Cause**: Missing `DataSourceName` attribute on Graph element
 - **Fix**: Add `DataSourceName="csvDataSource1"` to the Graph element
 
+**Error 6: Data point label font size not applying**
+- **Cause**: Using incorrect nested `<Style>` wrapper inside `DataPointLabelStyle`
+- **Wrong Syntax**:
+  ```xml
+  <DataPointLabelStyle Visible="True">
+    <Style>
+      <Font Size="6pt" />  <!-- Extra <Style> wrapper prevents sizing -->
+    </Style>
+  </DataPointLabelStyle>
+  ```
+- **Correct Syntax**:
+  ```xml
+  <DataPointLabelStyle Visible="True">
+    <Font Size="6pt" />  <!-- Font directly inside DataPointLabelStyle -->
+  </DataPointLabelStyle>
+  ```
+- The `<Font>` element must be a direct child of `DataPointLabelStyle`, not wrapped in `<Style>`
+
 ### Chart Color Best Practices
 
 - **Always use `DataPointConditionalFormatting`** to set bar/data point colors, not inline style attributes
